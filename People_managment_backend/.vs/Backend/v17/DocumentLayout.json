@@ -1,0 +1,126 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|d:\\ptm\\ptmprojects\\fullstack_application\\people_managment_backend\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|solutionrelative:backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|d:\\ptm\\ptmprojects\\fullstack_application\\people_managment_backend\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|d:\\ptm\\ptmprojects\\fullstack_application\\people_managment_backend\\backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|solutionrelative:backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|d:\\ptm\\ptmprojects\\fullstack_application\\people_managment_backend\\backend\\controllers\\peoplecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\peoplecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|d:\\ptm\\ptmprojects\\fullstack_application\\people_managment_backend\\backend\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|solutionrelative:backend\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|d:\\ptm\\ptmprojects\\fullstack_application\\people_managment_backend\\backend\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABDE4D1A-AF70-4018-BA02-4DADE30A4FAD}|Backend\\Backend.csproj|solutionrelative:backend\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Backend\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Backend\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-03T13:06:30.544Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PeopleController.cs",
+              "DocumentMoniker": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\Controllers\\PeopleController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\PeopleController.cs",
+              "ToolTip": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\Controllers\\PeopleController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\PeopleController.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAADwv24AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T07:59:42.617Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Person.cs",
+              "DocumentMoniker": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\Models\\Person.cs",
+              "RelativeDocumentMoniker": "Backend\\Models\\Person.cs",
+              "ToolTip": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\Models\\Person.cs",
+              "RelativeToolTip": "Backend\\Models\\Person.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T07:59:32.59Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\Models\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Backend\\Models\\AppDbContext.cs",
+              "ToolTip": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\Models\\AppDbContext.cs",
+              "RelativeToolTip": "Backend\\Models\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T07:58:55.951Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\appsettings.json",
+              "RelativeDocumentMoniker": "Backend\\appsettings.json",
+              "ToolTip": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\appsettings.json",
+              "RelativeToolTip": "Backend\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-02T06:56:39.34Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Backend\\Program.cs",
+              "ToolTip": "D:\\PTM\\PTMProjects\\fullstack_application\\People_managment_backend\\Backend\\Program.cs",
+              "RelativeToolTip": "Backend\\Program.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAqwCIAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T06:56:00.07Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
