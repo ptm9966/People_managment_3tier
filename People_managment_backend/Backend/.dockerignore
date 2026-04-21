@@ -1,0 +1,7 @@
+obj
+bin
+.git
+.gitignore
+.DS_Store
+*.user
+*.sln

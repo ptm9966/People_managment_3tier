@@ -1,0 +1,27 @@
+# Stage 1: Build application and run migrations
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS migration
+
+WORKDIR /src
+
+# Copy the project file and restore dependencies
+COPY "Backend.csproj" .
+RUN dotnet restore "Backend.csproj"
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the application
+RUN dotnet build "Backend.csproj" -c Release -o /app/build
+
+# Install the dotnet-ef tool globally
+RUN dotnet tool install --global dotnet-ef --version 9.0.*
+
+# Ensure the dotnet-ef tool is in the PATH
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+# Restore tool dependencies
+RUN dotnet tool restore
+
+# Set the entrypoint to run migrations
+# Build the connection string from discrete SQL environment variables.
+ENTRYPOINT ["/bin/sh", "-c", "dotnet ef database update --project Backend.csproj --startup-project Backend.csproj --connection \"Server=${DB_SERVER},${DB_PORT:-1433};Database=${DB_DATABASE};User Id=${DB_USER};Password=${DB_PASSWORD};Encrypt=${DB_ENCRYPT:-False};TrustServerCertificate=${DB_TRUST_SERVER_CERTIFICATE:-True};\""]

@@ -1,4 +1,7 @@
-﻿using Backend.Models;
+using Backend.Models;
+using Backend.Services;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,11 +43,43 @@ builder.Services.AddCors(options =>
 // ===========================
 // 3️⃣ SQL Server
 // ===========================
-var sqlConn = builder.Configuration.GetConnectionString("Default");
+var sqlServer = builder.Configuration["DB_SERVER"] ?? builder.Configuration["SqlServer:Server"];
+var sqlPort = builder.Configuration["DB_PORT"] ?? builder.Configuration["SqlServer:Port"] ?? "1433";
+var sqlDatabase = builder.Configuration["DB_DATABASE"] ?? builder.Configuration["SqlServer:Database"];
+var sqlUser = builder.Configuration["DB_USER"] ?? builder.Configuration["SqlServer:User"];
+var sqlPassword = builder.Configuration["DB_PASSWORD"] ?? builder.Configuration["SqlServer:Password"];
+var sqlEncrypt = builder.Configuration["DB_ENCRYPT"] ?? builder.Configuration["SqlServer:Encrypt"] ?? "True";
+var sqlTrustServerCertificate = builder.Configuration["DB_TRUST_SERVER_CERTIFICATE"] ?? builder.Configuration["SqlServer:TrustServerCertificate"] ?? "True";
+var sqlConnTemplate = builder.Configuration.GetConnectionString("Default");
 
-if (string.IsNullOrWhiteSpace(sqlConn))
+if (string.IsNullOrWhiteSpace(sqlServer) ||
+    string.IsNullOrWhiteSpace(sqlDatabase) ||
+    string.IsNullOrWhiteSpace(sqlUser) ||
+    string.IsNullOrWhiteSpace(sqlPassword))
 {
-    throw new Exception("ConnectionStrings:Default missing.");
+    throw new Exception("SQL Server configuration is incomplete. Configure DB_SERVER, DB_DATABASE, DB_USER, DB_PASSWORD or the SqlServer section.");
+}
+
+var sqlConn = new SqlConnectionStringBuilder
+{
+    DataSource = $"{sqlServer},{sqlPort}",
+    InitialCatalog = sqlDatabase,
+    UserID = sqlUser,
+    Password = sqlPassword,
+    Encrypt = bool.TryParse(sqlEncrypt, out var encryptValue) ? encryptValue : true,
+    TrustServerCertificate = bool.TryParse(sqlTrustServerCertificate, out var trustServerCertificateValue) ? trustServerCertificateValue : true
+}.ConnectionString;
+
+if (!string.IsNullOrWhiteSpace(sqlConnTemplate))
+{
+    sqlConn = sqlConnTemplate
+        .Replace("{DB_SERVER}", sqlServer)
+        .Replace("{DB_PORT}", sqlPort)
+        .Replace("{DB_DATABASE}", sqlDatabase)
+        .Replace("{DB_USER}", sqlUser)
+        .Replace("{DB_PASSWORD}", sqlPassword)
+        .Replace("{DB_ENCRYPT}", sqlEncrypt)
+        .Replace("{DB_TRUST_SERVER_CERTIFICATE}", sqlTrustServerCertificate);
 }
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -52,6 +87,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(sqlConn);
 });
 
+builder.Services.AddHealthChecks()
+    .AddCheck("self", () => HealthCheckResult.Healthy(), tags: new[] { "live" })
+    .AddCheck<SqlServerReadinessHealthCheck>("sql-server", tags: new[] { "ready" });
+
+builder.Services.AddSingleton<ApiMetricsStore>();
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -66,8 +106,22 @@ app.UseSwaggerUI();
 // 5️⃣ Middleware
 // ===========================
 app.UseCors(corsPolicyName);
+app.UseMiddleware<ApiMetricsMiddleware>();
 
 app.UseAuthorization();
+app.MapHealthChecks("/healthz", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("live")
+});
+app.MapHealthChecks("/ready", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("ready")
+});
+app.MapGet("/metrics", (ApiMetricsStore metricsStore) =>
+{
+    var metrics = PrometheusMetricsFormatter.Format(metricsStore.GetSnapshot());
+    return Results.Text(metrics, "text/plain; version=0.0.4; charset=utf-8");
+});
 app.MapControllers();
 
 app.Run();

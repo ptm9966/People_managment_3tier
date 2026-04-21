@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  # Run database migrations
+  migrations:
+    build:
+      context: ./People_managment_backend/Backend
+      dockerfile: Dockerfile.migrations
+    container_name: people-management-migrations
+    environment:
+      - DB_SERVER=db
+      - DB_PORT=1433
+      - DB_DATABASE=devpeopledb
+      - DB_USER=sa
+      - DB_PASSWORD=Ptm@19941225
+      - DB_ENCRYPT=False
+      - DB_TRUST_SERVER_CERTIFICATE=True
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - people-management-network
+    restart: "no"
+
+  # SQL Server Database
+  db:
+    image: mcr.microsoft.com/mssql/server:latest
+    container_name: people-management-db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Ptm@19941225
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost,1433 -U sa -P \"$${MSSQL_SA_PASSWORD}\" -C -Q \"SELECT 1\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    networks:
+      - people-management-network
+    restart: unless-stopped
+
+  # Backend API
+  backend:
+    build:
+      context: ./People_managment_backend/Backend
+      dockerfile: Dockerfile
+    container_name: people-management-api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - AllowedCorsOrigin__Url=http://localhost:8080
+      - DB_SERVER=db
+      - DB_PORT=1433
+      - DB_DATABASE=devpeopledb
+      - DB_USER=sa
+      - DB_PASSWORD=Ptm@19941225
+      - DB_ENCRYPT=False
+      - DB_TRUST_SERVER_CERTIFICATE=True
+    depends_on:
+      db:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+    networks:
+      - people-management-network
+    restart: unless-stopped
+
+  # Frontend React App
+  frontend:
+    build:
+      context: ./People_managment_frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_BASE_API_URL=http://localhost:5000/api
+    container_name: people-management-ui
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_started
+    networks:
+      - people-management-network
+    restart: unless-stopped
+
+networks:
+  people-management-network:
+    driver: bridge
+
+volumes:
+  sqldata:
